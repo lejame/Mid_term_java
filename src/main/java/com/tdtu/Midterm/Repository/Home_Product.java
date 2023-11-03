@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface Home_Product extends JpaRepository<Model_Phone,Integer> {
     List<Model_Phone> findAllByName(String name);
+
 }

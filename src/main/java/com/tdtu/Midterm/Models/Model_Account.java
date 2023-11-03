@@ -1,26 +1,29 @@
 package com.tdtu.Midterm.Models;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
 @Data
 @Entity
 @AllArgsConstructor
 @Getter
 @Setter
-public class Model_Phone_Brand {
+public class Model_Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_brand")
-    private int id_brand;
-    private String name;
+    private int id_account;
+    private String username;
+    private String pass;
+    private int Role;
 
-    public Model_Phone_Brand() {
-        id_brand = 0;
+    public Model_Account() {
+        id_account = 0;
     }
+
 }

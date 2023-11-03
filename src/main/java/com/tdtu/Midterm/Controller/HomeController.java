@@ -1,6 +1,10 @@
 package com.tdtu.Midterm.Controller;
 
-import com.tdtu.Midterm.Entity.Info_product;
+import com.tdtu.Midterm.Models.Model_Phone;
+import com.tdtu.Midterm.Models.Model_Phone_Brand;
+import com.tdtu.Midterm.Models.Model_Status;
+import com.tdtu.Midterm.Repository.Home_Product;
+import com.tdtu.Midterm.Service.HomeProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
@@ -10,13 +14,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/home")
+@RequestMapping("/api")
 public class HomeController {
-    @GetMapping("")
+    private HomeProductService homeProductl;
+    @GetMapping("/trangchu")
     public String fetchAll(Model phone){
-        List<Info_product> phones = new ArrayList<>();
-        phones.add(new Info_product(1,"Iphone 15","https://www.pngmart.com/files/15/Apple-iPhone-12-PNG-HD.png",1000,"Sản phẩm mới nhất",1));
+        List<Model_Phone> phones = homeProductl.getbyAll();
         phone.addAttribute("phone",phones);
-        return "Home.html";
+        return "Home";
     }
+
 }

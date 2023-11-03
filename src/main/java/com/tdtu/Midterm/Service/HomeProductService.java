@@ -18,5 +18,8 @@ public class HomeProductService {
     public List<Model_Phone> getHomeProductByName(String name){
         return homeProductRepository.findAllByName(name);
     }
+    public List<Model_Phone> getbyAll(){
+        return homeProductRepository.findAll();
+    }
 
 }

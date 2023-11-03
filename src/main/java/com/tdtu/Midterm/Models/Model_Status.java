@@ -7,20 +7,22 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
-@Data
-@Entity
-@AllArgsConstructor
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
 @Getter
+@Entity
+@Data
+@AllArgsConstructor
 @Setter
-public class Model_Phone_Brand {
+public class Model_Status {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_brand")
-    private int id_brand;
-    private String name;
+    private int id_status;
 
-    public Model_Phone_Brand() {
-        id_brand = 0;
+    private int payed;
+    private int stored;
+    public Model_Status() {
+        id_status = 0;
     }
 }
