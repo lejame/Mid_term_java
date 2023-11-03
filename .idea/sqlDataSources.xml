@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="2a840038-b74c-46aa-b7e0-2e474c0907f3" name="MariaDB [2] Mapping">
+      <data-sources db="7ba30935-76b5-4cfb-bc0b-f4f0484309bb" />
+      <scope>
+        <node negative="1">
+          <node kind="database" qname="@" />
+          <node kind="schema" qname="iphone_store" />
+        </node>
+      </scope>
+    </mapping>
+  </component>
+</project>
