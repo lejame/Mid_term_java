@@ -17,6 +17,6 @@ public class HomeController {
         List<Info_product> phones = new ArrayList<>();
         phones.add(new Info_product(1,"Iphone 15","https://www.pngmart.com/files/15/Apple-iPhone-12-PNG-HD.png",1000,"Sản phẩm mới nhất",1));
         phone.addAttribute("phone",phones);
-        return "abc";
+        return "Home.html";
     }
 }
