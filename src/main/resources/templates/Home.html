@@ -31,7 +31,7 @@
           <a class="nav-link" href="#">Logout</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Login</a>
+          <a class="nav-link" th:href="@{/login}">Login</a>
         </li>
       </ul>
 
@@ -76,21 +76,18 @@
   <div class="row">
     <div class="col-sm-3">
       <div class="card bg-light mb-3">
-        <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Categories</div>
-        <ul class="list-group category_block">
-<!--          <th:forEach items="${listCC}" var="o">-->
-<!--            <li class="list-group-item text-white"><a href="#">${o.cname}</a></li>-->
-<!--          </th:forEach>-->
-
-        </ul>
+        <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Categories</div><ul class="list-group category_block">
+        <th:block th:each="o : ${brand_phone}">
+          <li class="list-group-item text-white"><a href="#" th:text="${o.name}"></a></li>
+        </th:block>
+      </ul>
       </div>
       <div class="card bg-light mb-3">
         <div class="card-header bg-success text-white text-uppercase">Last product</div>
-        <div class="card-body">
-          <img class="img-fluid" src="${p.image}" />
-          <h5 class="card-title">${p.name}</h5>
-          <p class="card-text">${p.title}</p>
-          <p class="bloc_left_price">${p.price} $</p>
+        <div class="card-body" th:each="o : ${last_phone}">
+          <img class="img-fluid" th:src="${o.img}" />
+          <h5 class="card-title" th:text="${o.name}"></h5>
+          <p class="bloc_left_price" th:text="${o.price} +'$'"></p>
         </div>
       </div>
     </div>
@@ -99,10 +96,11 @@
       <div class="row">
         <div th:each="o : ${phone}" class="col-12 col-md-6 col-lg-4">
           <div class="card">
-            <img class="card-img-top" th:src="${o.img}" alt="Card image cap">
+            <div class="image-container">
+              <img class="card-img-top" th:src="${o.img}" alt="Card image cap" style="width: auto;height: 200px">
+            </div>
             <div class="card-body">
               <h4 class="card-title show_txt"><a href="#" title="View Product" th:text="${o.name}"></a></h4>
-<!--              <p class="card-text show_txt" th:text="${o.title}"></p>-->
               <div class="row">
                 <div class="col">
                   <p class="btn btn-danger btn-block" th:text="${o.price} + ' $'"></p>

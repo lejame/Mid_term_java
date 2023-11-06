@@ -20,7 +20,7 @@ public class Model_Phone {
     private int id;
     private String name;
     private String img;
-    private double price;
+    private int price;
     private String color;
     // xet thuoc tinh khoa ngoại cho brand
     @ManyToOne

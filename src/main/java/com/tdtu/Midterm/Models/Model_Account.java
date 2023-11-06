@@ -1,9 +1,6 @@
 package com.tdtu.Midterm.Models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -21,6 +18,8 @@ public class Model_Account {
     private String username;
     private String pass;
     private int Role;
+    @Transient
+    private String re_pass;
 
     public Model_Account() {
         id_account = 0;
