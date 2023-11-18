@@ -1,19 +1,20 @@
-uri="http://java.sun.com/jsp/jstl/core"
-%@page contentType="text/html" pageEncoding="UTF-8"
 <!--<!DOCTYPE html>-->
 <html>
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>JSP Page</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-          crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 </head>
 
 <body>
-<!--<%&#45;&#45;        <jsp:include page="Menu.jsp"></jsp:include>&#45;&#45;%>-->
+<div class="container-fluid" style="top:0; padding: 10px; background-color: #0b4039">
+    <div href="#" class="text-dark" style="display:flex;justify-content: flex-end; margin: 10px">
+        <button type="button" class="btn btn-success" style="margin-right: 10px;"><a style="text-decoration: none; color: white;" th:href="@{/home/{name} (name=${user_account.getUsername()})}">Trang chủ</a></button>
+    </div>
+</div>
 <div class="shopping-cart">
     <div class="px-4 px-lg-0">
 
@@ -42,33 +43,30 @@ uri="http://java.sun.com/jsp/jstl/core"
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${list}" var="o">
-                                    <tr>
-                                        <th scope="row">
-                                            <div class="p-2">
-                                                <img src="${o.image}" alt="" width="70"
-                                                     class="img-fluid rounded shadow-sm">
-                                                <div class="ml-3 d-inline-block align-middle">
-                                                    <h5 class="mb-0"> <a href="#"
-                                                                         class="text-dark d-inline-block">${o.name}</a>
-                                                    </h5><span
-                                                        class="text-muted font-weight-normal font-italic"></span>
-                                                </div>
+                                <tr th:each="o : ${list_cart}">
+                                    <td>
+                                        <div class="p-2">
+                                            <img th:src="@{${o.getPhone().getImg()}}" alt="" width="70"
+                                                 class="img-fluid rounded shadow-sm">
+                                            <div class="ml-3 d-inline-block align-middle">
+                                                <h5 class="mb-0"><a href="#" class="text-dark d-inline-block"
+                                                                    th:text="${o.getPhone().getName()}"></a></h5>
+                                                <span class="text-muted font-weight-normal font-italic"></span>
                                             </div>
-                                        </th>
-                                        <td class="align-middle"><strong>${o.price}</strong></td>
-                                        <td class="align-middle">
-                                            <a href="#"><button class="btnSub">-</button></a>
-                                            <strong>${o.amount}</strong>
-                                            <a href="#"><button class="btnAdd">+</button></a>
-                                        </td>
-                                        <td class="align-middle"><a href="#" class="text-dark">
-                                            <button type="button"
-                                                    class="btn btn-danger">Delete</button>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle"><strong th:text="${o.getPhone().getPrice()}"></strong></td>
+                                    <td class="align-middle">
+                                        <a th:href="@{/delete/{id_phone}/{name}/{quantity} (id_phone = ${o.getPhone().getId()},name =${user_account.getUsername()},quantity = ${o.getAmount()})}"><button class="btnSub">-</button></a>
+                                        <strong th:text="${o.getAmount()}"></strong>
+                                        <a th:href="@{/update/{id_phone}/{name}/{quantity} (id_phone = ${o.getPhone().getId()},name =${user_account.getUsername()},quantity = ${o.getAmount()})}"><button class="btnAdd">+</button></a>
+                                    </td>
+                                    <td class="align-middle">
+                                        <a href="#" class="text-dark" th:href="@{/btn_delete/{id}/{name} (id = ${o.getPhone().getId()},name = ${user_account.getUsername()})}">
+                                            <button type="button" class="btn btn-danger" >Delete</button>
                                         </a>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
+                                    </td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -82,12 +80,12 @@ uri="http://java.sun.com/jsp/jstl/core"
                         </div>
                         <div class="p-4">
                             <div class="input-group mb-4 border rounded-pill p-2">
-                                <input type="text" placeholder="Nhập Voucher"
-                                       aria-describedby="button-addon3" class="form-control border-0">
+                                <input type="text" placeholder="Nhập Voucher" aria-describedby="button-addon3"
+                                       class="form-control border-0">
                                 <div class="input-group-append border-0">
                                     <button id="button-addon3" type="button"
-                                            class="btn btn-dark px-4 rounded-pill"><i
-                                            class="fa fa-gift mr-2"></i>Sử dụng</button>
+                                            class="btn btn-dark px-4 rounded-pill"><i class="fa fa-gift mr-2"></i>Sử
+                                        dụng</button>
                                 </div>
                             </div>
                         </div>
@@ -96,24 +94,25 @@ uri="http://java.sun.com/jsp/jstl/core"
                         <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Thành
                             tiền</div>
                         <div class="p-4">
-                            <ul class="list-unstyled mb-4">
+                            <div th:each="o : ${listcart}"></div>
+                            <ul class="list-unstyled mb-4" th:with="total=0">
                                 <li class="d-flex justify-content-between py-3 border-bottom"><strong
-                                        class="text-muted">Tổng tiền hàng</strong><strong>100 $</strong>
+                                        class="text-muted">Tổng tiền hàng</strong><strong
+                                        th:text="${money}+'$'"></strong>
                                 </li>
                                 <li class="d-flex justify-content-between py-3 border-bottom"><strong
                                         class="text-muted">Phí vận chuyển</strong><strong>Free ship</strong>
                                 </li>
                                 <li class="d-flex justify-content-between py-3 border-bottom"><strong
-                                        class="text-muted">VAT</strong><strong>10 $</strong></li>
+                                        class="text-muted">VAT</strong><strong>10%</strong></li>
                                 <li class="d-flex justify-content-between py-3 border-bottom"><strong
                                         class="text-muted">Tổng thanh toán</strong>
-                                    <h5 class="font-weight-bold">110 $</h5>
+                                    <h5 class="font-weight-bold" th:text="${money}+${money}*0.1+'$'"></h5>
                                 </li>
                             </ul><a href="buy" class="btn btn-dark rounded-pill py-2 btn-block">Mua hàng</a>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

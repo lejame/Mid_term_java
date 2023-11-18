@@ -20,6 +20,7 @@ public class Model_Phone_Brand {
     private int id_brand;
     private String name;
 
+
     public Model_Phone_Brand() {
         id_brand = 0;
     }

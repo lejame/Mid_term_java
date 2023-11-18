@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap CRUD Data Table for Database with Modal Form</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="css/manager.css" rel="stylesheet" type="text/css" />
+    <style>
+        img {
+            width: 200px;
+            height: 120px;
+        }
+    </style>
+
+<body>
+<div class="container">
+    <div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form th:each = "p : ${inf_phone}" >
+                    <div class="modal-header">
+                        <h4 class="modal-title">Edit Employee</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Color</label>
+                            <input name="color" type="text" class="form-control" th:text = "${p.name}" required >
+                        </div>
+
+                        <div class="form-group">
+                            <label>Image</label>
+                            <input name="image" type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input name="name" type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <input name="description" type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Price</label>
+                            <input name="price" type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_brand_edit">Brand</label>
+                            <select name="id_brand" id="id_brand_edit" required style="height: 20px;">
+                                <option value="">-- Select brand --</option>
+                                <option th:each="brand : ${phone_brand}" th:value="${brand.getId_brand()}" th:text="${brand.getName()}"></option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_caterory_edit">Caterory</label>
+                            <select name="id_caterory" id="id_caterory_edit" required style="height: 20px;" >
+                                <option value="">-- Select brand --</option>
+                                <option th:each="caterory : ${phone_caterory}" th:value="${caterory.getId_caterory()}" th:text="${caterory.getName()}"></option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                        <input type="submit" class="btn btn-info" value="Save">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,28 +1,25 @@
 package com.tdtu.Midterm.Models;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-
-@Getter
 @Entity
 @Data
 @AllArgsConstructor
+@Getter
 @Setter
-public class Model_Status {
+public class Model_Caterory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_status;
+    private int id_caterory;
 
-    private int payed;
-    private int stored;
-    public Model_Status() {
-        id_status = 0;
+    private String name;
+    public Model_Caterory(){
+        id_caterory = 0;
     }
 }
