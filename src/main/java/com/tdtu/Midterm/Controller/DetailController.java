@@ -34,5 +34,4 @@ public class DetailController {
         phone.addAttribute("phone_detail",phones);
         return "DetailsNoUser";
     }
-
 }

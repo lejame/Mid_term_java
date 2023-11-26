@@ -60,4 +60,18 @@ public class AdminService {
             return false;
         }
     }
+    public List<Model_Caterory> getCaterory(){
+        return cateroryRepository.findAll();
+    }
+    public void updateProducts(int id,String img,String name,String color,int price,String description,int caterory,int brand){
+        Optional<Model_Phone> phone = managementProductRepository.findById(id);
+        phone.get().setName(name);
+        phone.get().setImg(img);
+        phone.get().setPrice(price);
+        phone.get().setDescription(description);
+        phone.get().setModel_caterory(cateroryRepository.findById(caterory).get());
+        phone.get().setPhoneBrand(modelPhoneBrandRepository.findById(brand).get());
+        phone.get().setColor(color);
+        managementProductRepository.save(phone.get());
+    }
 }

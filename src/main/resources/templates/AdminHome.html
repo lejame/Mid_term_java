@@ -3,11 +3,11 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>JSP Page</title>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link th:href="@{//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}" rel="stylesheet" id="bootstrap-css">
+    <script th:src="@{//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
+    <script th:src="@{//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js}"></script>
     <!------ Include the above in your HEAD tag ---------->
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css}" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link href="css/style.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
@@ -43,9 +43,9 @@
                 </li>
             </ul>
 
-            <form action="search" method="post" class="form-inline my-2 my-lg-0">
+            <form th:action="@{/home/search_admin/{user}(user = ${username.getUsername()})}" class="form-inline my-2 my-lg-0">
                 <div class="input-group input-group-sm">
-                    <input name="txt" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search...">
+                    <input name="query" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search...">
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-secondary btn-number">
                             <i class="fa fa-search"></i>
@@ -73,8 +73,6 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="Home.html">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Category</a></li>
-                    <li class="breadcrumb-item active" aria-current="#">Sub-category</li>
                 </ol>
             </nav>
         </div>
@@ -84,11 +82,31 @@
     <div class="row">
         <div class="col-sm-3">
             <div class="card bg-light mb-3">
-                <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Brands</div><ul class="list-group category_block">
-                <th:block th:each="o : ${brand_phone}">
-                    <li class="list-group-item text-white"><a href="#" th:text="${o.name}"></a></li>
-                </th:block>
-            </ul>
+                <form th:action="@{/home/search_all_admin/{username}(username = ${username.getUsername()})}">
+                    <select style="margin-bottom: 10px; height: 50px;font-family: 'Varela Round', sans-serif;"
+                            name="caterory">
+                        <option value="0">Caterory</option>
+                        <option value="1">New</option>
+                        <option value="2">Old</option>
+                    </select>
+                    <select style="margin-bottom: 10px; height: 50px;font-family: 'Varela Round', sans-serif;"
+                            name="price">
+                        <option value="0">Price</option>
+                        <option value="500">Down 500</option>
+                        <option value="1000">Down 1000</option>
+                        <option value="2000">2000</option>
+                    </select>
+                    <select style="margin-bottom: 10px; height: 50px;font-family: 'Varela Round', sans-serif;"
+                            name="brand">
+                        <option value="0">Brand</option>
+                        <option th:each="brand : ${brand_phone}" th:value="${brand.getId_brand()}"
+                                th:text="${brand.getName()}"></option>
+                    </select>
+                    <br>
+                    <div style="display: flex;justify-content: flex-end;">
+                        <input type="submit" class="submit-btn" value="Find" style="margin-bottom: 10px;">
+                    </div>
+                </form>
             </div>
             <div class="card bg-light mb-3">
                 <div class="card-header bg-success text-white text-uppercase">Last product</div>

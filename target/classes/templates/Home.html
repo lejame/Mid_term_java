@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>JSP Page</title>
@@ -7,60 +8,50 @@
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <!------ Include the above in your HEAD tag ---------->
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-  <link href="css/style.css" rel="stylesheet" type="text/css"/>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link href="css/style.css" rel="stylesheet" type="text/css" />
 </head>
+
 <body>
 <!--begin of menu-->
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
   <div class="container">
     <a class="navbar-brand" th:href="@{/home}">Shoes</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
-    <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
-      <ul class="navbar-nav m-auto">
-        <li class="nav-item">
-          <a class="nav-link">Manager Account</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link"></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Logout</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" th:href="@{/login}">Login</a>
-        </li>
-      </ul>
-
-      <form action="search" method="post" class="form-inline my-2 my-lg-0">
-        <div class="input-group input-group-sm">
-          <input name="txt" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search...">
-          <div class="input-group-append">
-            <button type="submit" class="btn btn-secondary btn-number">
-              <i class="fa fa-search"></i>
-            </button>
-          </div>
+    <form th:action="@{/home/search}" class="form-inline my-2 my-lg-0">
+      <div class="input-group input-group-sm">
+        <input name="query" type="text" class="form-control" aria-label="Small"
+               aria-describedby="inputGroup-sizing-sm" placeholder="Search...">
+        <div class="input-group-append">
+          <button type="submit" class="btn btn-secondary btn-number">
+            <i class="fa fa-search"></i>
+          </button>
         </div>
-        <a id="cartButton" class="btn btn-success btn-sm ml-3" onclick="require_login()">
-          <i class="fa fa-shopping-cart" ></i> Cart
-          <span id="cartCount" class="badge badge-light">0</span>
-        </a>
-        <script>
-          function require_login(){
-            alert("Vui lòng đăng nhập !!");
-          }
-        </script>
-      </form>
+      </div>
+    </form>
+    <div>
+      <a id="cartButton" class="btn btn-success btn-sm ml-3" onclick="require_login()">
+        <i class="fa fa-shopping-cart" ></i> Cart
+        <span id="cartCount" class="badge badge-light">0</span>
+      </a>
+      <script>
+        function require_login(){
+          alert("Vui lòng đăng nhập !!");
+        }
+      </script>
+      <a type="button" class="btn btn-info" value="" th:href="@{/login}" style="color: white;">Login</a>
     </div>
   </div>
 </nav>
 <section class="jumbotron text-center">
   <div class="container">
     <h1 class="jumbotron-heading">Thế giới di động có điện thoại chất lượng cao</h1>
-    <p class="lead text-muted mb-0">Uy tín tạo nên thương hiệu với hơn 10 năm cung cấp các sản phầm điện thoại nhập từ Trung Quốc</p>
+    <p class="lead text-muted mb-0">Uy tín tạo nên thương hiệu với hơn 10 năm cung cấp các sản phầm điện thoại
+      nhập từ Trung Quốc</p>
   </div>
 </section>
 <!--end of menu-->
@@ -70,8 +61,6 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="Home.html">Home</a></li>
-          <li class="breadcrumb-item"><a href="#">Category</a></li>
-          <li class="breadcrumb-item active" aria-current="#">Sub-category</li>
         </ol>
       </nav>
     </div>
@@ -81,11 +70,31 @@
   <div class="row">
     <div class="col-sm-3">
       <div class="card bg-light mb-3">
-        <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Brands</div><ul class="list-group category_block">
-        <th:block th:each="o : ${brand_phone}">
-          <li class="list-group-item text-white"><a href="#" th:text="${o.name}"></a></li>
-        </th:block>
-      </ul>
+        <form th:action="@{/home/search_all}">
+          <select style="margin-bottom: 10px; height: 50px;font-family: 'Varela Round', sans-serif;"
+                  name="caterory">
+            <option value="0">Caterory</option>
+            <option value="1">New</option>
+            <option value="2">Old</option>
+          </select>
+          <select style="margin-bottom: 10px; height: 50px;font-family: 'Varela Round', sans-serif;"
+                  name="price">
+            <option value="0">Price</option>
+            <option value="500">Down 500</option>
+            <option value="1000">Down 1000</option>
+            <option value="2000">2000</option>
+          </select>
+          <select style="margin-bottom: 10px; height: 50px;font-family: 'Varela Round', sans-serif;"
+                  name="brand">
+            <option value="0">Brand</option>
+            <option th:each="brand : ${brand_phone}" th:value="${brand.getId_brand()}"
+                    th:text="${brand.getName()}"></option>
+          </select>
+          <br>
+          <div style="display: flex;justify-content: flex-end;">
+            <input type="submit" class="submit-btn" value="Find" style="margin-bottom: 10px;">
+          </div>
+        </form>
       </div>
       <div class="card bg-light mb-3">
         <div class="card-header bg-success text-white text-uppercase">Last product</div>
@@ -99,15 +108,18 @@
 
     <div class="col-sm-9">
       <div class="row">
-        <div th:each="o : ${phone}" class="col-12 col-md-6 col-lg-4" style="width: 20vh;margin-bottom: 10px;">
+        <div th:each="o : ${phone}" class="col-12 col-md-6 col-lg-4"
+             style="width: 20vh;margin-bottom: 10px;">
           <div class="card">
             <div class="image-container">
               <a th:href="@{/detailProduct/{id} (id=${o.getId()})}">
-                <img class="card-img-top" th:src="${o.img}" alt="Card image cap" style="width: auto;height: 200px">
+                <img class="card-img-top" th:src="${o.img}" alt="Card image cap"
+                     style="width: auto;height: 200px">
               </a>
             </div>
             <div class="card-body">
-              <h4 class="card-title show_txt"><a href="#" title="View Product" th:text="${o.name}"></a></h4>
+              <h4 class="card-title show_txt"><a href="#" title="View Product"
+                                                 th:text="${o.name}"></a></h4>
               <div class="row">
                 <div class="col">
                   <p class="btn btn-danger btn-block" th:text="${o.price} + ' $'"></p>
@@ -124,7 +136,8 @@
 
 <!-- Footer -->
 <div style="position: relative; min-height: 100vh;">
-  <footer class="text-light" style="background-color: #0b4039; bottom: 0; position: absolute; left: 0; width: 100%;">
+  <footer class="text-light"
+          style="background-color: #0b4039; bottom: 0; position: absolute; left: 0; width: 100%;">
     <div class="container">
       <div class="row">
         <div class="col-md-3 col-lg-4 col-xl-3">
@@ -167,7 +180,8 @@
           <p class="float-left">
             <a href="#">Back to top</a>
           </p>
-          <p class="text-right text-muted">created with <i class="fa fa-heart"></i> by <a th:href="@{https://t-php.fr/43-theme-ecommerce-bootstrap-4.html}"><i></i>Lê Hữu Lợi</a>
+          <p class="text-right text-muted">created with <i class="fa fa-heart"></i> by <a
+                  th:href="@{https://t-php.fr/43-theme-ecommerce-bootstrap-4.html}"><i></i>Lê Hữu Lợi</a>
         </div>
       </div>
     </div>
@@ -175,4 +189,5 @@
 </div>
 
 </body>
+
 </html>

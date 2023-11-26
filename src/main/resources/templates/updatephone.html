@@ -1,81 +1,109 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap CRUD Data Table for Database with Modal Form</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link href="css/manager.css" rel="stylesheet" type="text/css" />
+    <title>Thêm sản phẩm</title>
     <style>
-        img {
-            width: 200px;
-            height: 120px;
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea
+         {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        textarea {
+            height: 100px;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            text-align: center;
+            cursor: pointer;
         }
     </style>
+</head>
 
 <body>
-<div class="container">
-    <div class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form th:each = "p : ${inf_phone}" >
-                    <div class="modal-header">
-                        <h4 class="modal-title">Edit Employee</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label>Color</label>
-                            <input name="color" type="text" class="form-control" th:text = "${p.name}" required >
-                        </div>
+<h1>Sửa sản phẩm</h1>
 
-                        <div class="form-group">
-                            <label>Image</label>
-                            <input name="image" type="text" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Name</label>
-                            <input name="name" type="text" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Description</label>
-                            <input name="description" type="text" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Price</label>
-                            <input name="price" type="text" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="id_brand_edit">Brand</label>
-                            <select name="id_brand" id="id_brand_edit" required style="height: 20px;">
-                                <option value="">-- Select brand --</option>
-                                <option th:each="brand : ${phone_brand}" th:value="${brand.getId_brand()}" th:text="${brand.getName()}"></option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="id_caterory_edit">Caterory</label>
-                            <select name="id_caterory" id="id_caterory_edit" required style="height: 20px;" >
-                                <option value="">-- Select brand --</option>
-                                <option th:each="caterory : ${phone_caterory}" th:value="${caterory.getId_caterory()}" th:text="${caterory.getName()}"></option>
-                            </select>
-                        </div>
+<form th:action="@{/phone/edit/{id}(id = ${inf_phone.getId()})}" method="post" enctype="multipart/form-data">
+    <label for="product-name">Tên sản phẩm:</label>
+    <input type="text" id="product-name" name="product-name" required th:value="${inf_phone.getName()}">
 
-                    </div>
-                    <div class="modal-footer">
-                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                        <input type="submit" class="btn btn-info" value="Save">
-                    </div>
-                </form>
-            </div>
-        </div>
+    <label for="product-price">Giá:</label>
+    <input type="text" id="product-price" name="product-price" required th:value="${inf_phone.getPrice()}">
+
+    <label for="id_brand">Brand</label>
+    <select name="id_brand" id="id_brand" style="height: 20px;">
+        <option value="">-- Select brand --</option>
+        <option th:each="brand : ${brand}" th:value="${brand.getId_brand()}" th:text="${brand.getName()}"></option>
+    </select>
+    <label for="id_caterory">Caterory</label>
+    <select name="id_caterory" id="id_caterory"  style="height: 20px;">
+        <option value="">-- Select caterory --</option>
+        <option th:each="caterory : ${caterories}" th:value="${caterory.getId_caterory()}"
+                th:text="${caterory.getName()}"></option>
+    </select>
+
+    <label for="product-color">Màu sắc:</label>
+    <input type="text" id="product-color" name="product-color" required th:value="${inf_phone.getColor()}">
+
+    <label for="product-description">Mô tả:</label>
+    <textarea id="product-description" name="product-description" required
+              th:text="${inf_phone.getDescription()}"></textarea>
+
+    <label for="product-image">Hình ảnh:</label>
+    <input type="text" id="product-image" name="product-image" required th:value="${inf_phone.getImg()}">
+    <div style="display: flex;justify-content: space-between;">
+        <img class="card-img-top" th:src="${inf_phone.getImg()}" alt="Card image cap"
+             style="width: auto;height: 200px; margin-top: 5px;">
+        <button type="submit" style="height: fit-content; margin-top: 5px;" th:href="@{/phone/Reload/{id}(id = ${inf_phone.getId()})}">Reload</button>
     </div>
-</div>
+    <p></p>
+    <input type="submit" class="submit-btn" value="Lưu sản phẩm" style="margin-bottom: 10px;">
 
+</form>
+<br>
+<div style="display: flex; justify-content: center;">
+    <a type="submit" style="width: fit-content; background: dimgrey; color: white; font-family: 'Varela Round', sans-serif; font-size: medium; text-decoration: none; border-radius:5px; border: 1px solid; margin: 10px 0 10px 0 ;" th:href="@{/phone_management/{username}(username = admin)}">Trở về trang Admin</a>
+</div>
 </body>
+
 </html>
