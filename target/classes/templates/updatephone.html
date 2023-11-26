@@ -71,12 +71,12 @@
     <input type="text" id="product-price" name="product-price" required th:value="${inf_phone.getPrice()}">
 
     <label for="id_brand">Brand</label>
-    <select name="id_brand" id="id_brand" required style="height: 20px;">
+    <select name="id_brand" id="id_brand" style="height: 20px;">
         <option value="">-- Select brand --</option>
         <option th:each="brand : ${brand}" th:value="${brand.getId_brand()}" th:text="${brand.getName()}"></option>
     </select>
     <label for="id_caterory">Caterory</label>
-    <select name="id_caterory" id="id_caterory" required style="height: 20px;">
+    <select name="id_caterory" id="id_caterory"  style="height: 20px;">
         <option value="">-- Select caterory --</option>
         <option th:each="caterory : ${caterories}" th:value="${caterory.getId_caterory()}"
                 th:text="${caterory.getName()}"></option>
