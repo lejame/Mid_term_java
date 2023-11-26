@@ -1,0 +1,33 @@
+//////////status
+
+Insert into model_status(id_status,payed,stored) values(4,6,100);
+
+Insert into  model_phone_brand(id_brand,name) values(1,'Apple');
+Insert into  model_phone_brand(id_brand,name) values(2,'SamSung');
+Insert into  model_phone_brand(id_brand,name) values(3,'Oppo');
+Insert into  model_phone_brand(id_brand,name) values(4,'Realme');
+
+Insert into model_caterory(id_caterory,name) values(1,'New')
+Insert into model_caterory(id_caterory,name) values(2,'Old')
+
+
+
+
+
+// user
+admin 123
+
+
+
+
+
+////// phone
+INSERT INTO model_phone(`color`,`description`,`img`,`name`,`price`,`id_caterory`,`id_brand`) values(N'Trắng','Sản phẩm bán chạy nhất hiện nay','https://th.bing.com/th/id/OIP.MOcfaj0mdHeSJ6VI-G4FJwHaMK?pid=ImgDet&rs=1','IPhone',1000,1,1);
+
+INSERT INTO model_phone(`color`,`description`,`img`,`name`,`price`,`id_caterory`,`id_brand`) values(N'Hồng','sáng tạo đọc đáo trong việc lựa chọn màu hồng để làm tone chủ đạo của điện thoại','https://manilashaker.com/wp-content/uploads/2020/07/samsung-galaxy-s20-bts-edition-2nd-batch-of-pre-order-now-open.png','Galaxy',1000,1,2);
+
+INSERT INTO model_phone(`color`,`description`,`img`,`name`,`price`,`id_caterory`,`id_brand`) values(N'Xanh dương','Luôn biết cách tạo ra giá trị của các dòng sản phẩm , lựa chọn oppo luôn là sự tin tưởng của mọi người','https://th.bing.com/th/id/R.e582f23f300acfd540e77ee56effa8ac?rik=s1pcpg2zledXFA&pid=ImgRaw&r=0','Oppo',1000,1,3);
+
+
+INSERT INTO model_phone(`color`,`description`,`img`,`name`,`price`,`id_caterory`,`id_brand`) values(N'Hồng','Tất cả các dòng điện thoại luôn được realme update để hỡ trợ người dùng liên tục','https://images.priceoye.pk/realme-5-pakistan-priceoye-ymjkf.jpg','Realme',1000,1,3);
+
