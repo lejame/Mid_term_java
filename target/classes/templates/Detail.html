@@ -60,7 +60,7 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
             <ul class="navbar-nav m-auto">
                 <li class="nav-item">
-                    <a class="nav-link" th:text="${usernamedetails.getUsername()}"></a>
+                    <a class="nav-link" th:text="${usernamedetails.getUsername()}" th:href="@{/admin_home/{name}(name = ${usernamedetails.getUsername()})}"></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Logout</a>
@@ -80,7 +80,8 @@
                         </button>
                     </div>
                 </div>
-                <a id="cartButton" class="btn btn-success btn-sm ml-3" th:href="@{/cart/{name} (name = ${usernamedetails.getUsername()})}">
+                <a id="cartButton" class="btn btn-success btn-sm ml-3"
+                   th:href="@{/cart/{name} (name = ${usernamedetails.getUsername()})}">
                     <i class="fa fa-shopping-cart"></i> Cart
                 </a>
 
@@ -95,7 +96,7 @@
             <div class="col-sm-8">
                 <div class="container" style="height: 50vh;">
                     <div class="card">
-                        <div class="row" th:each="o : ${phone_detail}" >
+                        <div class="row" th:each="o : ${phone_detail}">
                             <aside class="col-sm-5 border-right">
                                 <article class="gallery-wrap">
                                     <div class="img-big-wrap">
@@ -136,30 +137,14 @@
                                                     </dd>
                                                 </dl> <!-- item-property .// -->
                                             </div> <!-- col.// -->
-
+                                            <hr>
+                                            <a class="btn btn-lg btn-outline-primary text-uppercase"
+                                               id="addToCartBtn"
+                                               th:href="@{/addToCart/{id}/{quantity}/{name} (id=${o.getId()}, quantity = ${1}, name = ${usernamedetails.getUsername()})}" style="display: inline-block;">
+                                                <i class="fas fa-shopping-cart"></i> Add to cart
+                                            </a>
                                         </div> <!-- row.// -->
-                                        <hr>
-                                        <a href="#" class="btn btn-lg btn-primary text-uppercase"> Buy now </a>
-                                        <a href="#" class="btn btn-lg btn-outline-primary text-uppercase"
-                                           id="addToCartBtn"
-                                           th:href="@{/addToCart/{id}/{quantity}/{name} (id=${o.getId()}, quantity = ${1}, name = ${usernamedetails.getUsername()})}"
-                                           onclick="addToCart()">
-                                            <i class="fas fa-shopping-cart"></i> Add to cart
-                                        </a>
-                                        <script>
-                                            function addToCart() {
-                                                // Thực hiện các thao tác thêm sản phẩm vào giỏ hàng
 
-                                                // Lấy số lượng hiện tại từ thẻ <span> có id "cartCount"
-                                                var cartCount = parseInt(document.getElementById("cartCount").innerText);
-
-                                                // Tăng số lượng lên 1 sau khi thêm sản phẩm vào giỏ hàng
-                                                cartCount++;
-
-                                                // Gán số lượng mới cho thẻ <span> có id "cartCount"
-                                                document.getElementById("cartCount").innerText = cartCount;
-                                            }
-                                        </script>
                                     </div>
                                 </article> <!-- card-body.// -->
                             </aside> <!-- col.// -->
@@ -173,7 +158,8 @@
 </div>
 <!-- Footer -->
 <div style="position: relative; min-height: 100vh;">
-    <footer class="text-light" style="background-color: #0b4039; bottom: 0; position: absolute; left: 0; width: 100%;">
+    <footer class="text-light"
+            style="background-color: #0b4039; bottom: 0; position: absolute; left: 0; width: 100%;">
         <div class="container">
             <div class="row">
                 <div class="col-md-3 col-lg-4 col-xl-3">
@@ -216,7 +202,8 @@
                     <p class="float-left">
                         <a href="#">Back to top</a>
                     </p>
-                    <p class="text-right text-muted">created with <i class="fa fa-heart"></i> by <a th:href="@{https://t-php.fr/43-theme-ecommerce-bootstrap-4.html}"><i></i>Lê Hữu Lợi</a>
+                    <p class="text-right text-muted">created with <i class="fa fa-heart"></i> by <a
+                            th:href="@{https://t-php.fr/43-theme-ecommerce-bootstrap-4.html}"><i></i>Lê Hữu Lợi</a>
                 </div>
             </div>
         </div>
