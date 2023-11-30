@@ -103,4 +103,4 @@ Sau khi hoàn thành việc tạo database và thêm dữu liệu thì có thể
 
 ## VI.Demo <a name="demo"></a>
  
-![Bấm vào đây để xem]()
+![Bấm vào đây để xem](/Diagram_Values/2023-11-30%2023-25-11.mkv)
